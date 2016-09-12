@@ -11,7 +11,9 @@ import {
   ButtonOuter,
   getBasicColor
 } from './ButtonStyle';
+
 import {Color, RGB, HSL} from 'tool';
+
 class Button extends Component {
   constructor(props) {
     super(props);
@@ -23,14 +25,16 @@ class Button extends Component {
     const {
       children = '',
       theme = 'default',
-      type = 'default'
+      type = 'surface',
+      surface = 'default',
+      size = 'default'
     } = this.props;
     if (React.isValidElement(children)) {
       return children;
     }
     if (typeof children === 'string') {
-      return <Text 
-                style={[ButtonType[type], getBasicColor(theme, type, 0)]}>
+      return <Text
+                style={[ButtonType[size], getBasicColor(theme, type, 0)]}>
                 {children}
              </Text>;
     }
@@ -40,21 +44,13 @@ class Button extends Component {
     const {
       children = '',
       theme = 'default',
-      type = 'default',
-      size = 'default',
-      color = ''
+      type = 'surface',
+      size = 'default'
     } = this.props;
-    if (color) {
-      let newColor = HSL.rgbToHsl(Color.format(color));
-    };
-    let typepass;
-    if (type.indexOf('surface') === -1) {
-      typepass = 'surface' + type;
-    } else {
-      typepass = type;
-    }
     return (
-      <TouchableHighlight style={[this.props.style, ButtonOuter.btn, ButtonOuter[typepass], getBasicColor(theme, type, 1)]}>
+      <TouchableHighlight
+        style={[this.props.style, ButtonOuter.btn, ButtonOuter[size], getBasicColor(theme, type, 1)]}
+        >
         {this._renderChildren()}
       </TouchableHighlight>
     );

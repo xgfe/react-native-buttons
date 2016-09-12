@@ -148,12 +148,12 @@ export class HSL {
     return new HSL(h, s * 100, l * 100, a);
   }
   darken (value) {
-    this.l = this.l * (1 - value);
-    return this;
+    let newl = this.l * (1 - value);
+    return new HSL(this.h, this.s, newl, this.a);
   }
   lighten (value) {
-    this.l = this.l * (1 + value);
-    return this;
+    let newl = this.l * (1 + value);
+    return new HSL(this.h, this.s, newl, this.a);
   }
 }
 

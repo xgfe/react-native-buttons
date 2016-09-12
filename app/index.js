@@ -22,8 +22,17 @@ class button extends Component {
       <View style={{marginLeft: 20}}>
         <Text>Just for fun</Text>
           <Button
+            type="surface"
             size="small"
-            color="#EE3B3B">Small</Button>
+            theme="#EE3B3B">Small</Button>
+          <Button
+            style={{marginTop: 50}}
+            type="ghost"
+            theme="default">Default</Button>
+          <Button
+            style={{marginTop: 100}}
+            size="large"
+            theme="orange">Large</Button>
       </View>
       );
   }

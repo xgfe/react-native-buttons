@@ -1,5 +1,6 @@
 import StyleSheet from 'react-native-stylesheet-xg';
 import {BackgroundColors, FontColors, FontSize} from './ButtonInfo';
+import {Color, RGB, HSL} from 'tool';
 
 // set The style base
 StyleSheet.setBase(360);
@@ -9,11 +10,19 @@ export function getBasicColor(theme, type, flag) {
   if (theme === 'default') {
     theme = 'blue';
   }
-  let themeColor = BackgroundColors[theme];
+  let themeMap = ['orange', 'blue', 'red', 'gray'];
+  let themeColor;
+  if (themeMap.indexOf(theme) === -1) {
+    let newColor = HSL.rgbToHsl(Color.format(theme));
+    let newColorDisable = newColor.lighten(0.3);
+    let newColorActive = newColor.darken(0.3);
+    themeColor = 'hsla(' + newColor.h + ', ' + newColor.s + '%, ' + newColor.l + '%, ' + newColor.a + ')';
+  } else {
+    themeColor = BackgroundColors[theme];
+  } 
   let ButtonThemeType;
-  let temp;
-  type.indexOf('surface') > -1 ? temp = 'surface' : temp = 'others';
-  switch (temp) {
+  console.log(themeColor);
+  switch (type) {
     case 'surface':
       ButtonThemeType = StyleSheet.create({
         theme: {
@@ -92,21 +101,21 @@ export let ButtonOuter = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  surfacesmall: {
+  small: {
     borderRadius: 3,
     borderWidth: 1,
     height: 25,
     paddingRight: 12,
     paddingLeft: 12
   },
-  surfacedefault: {
+  default: {
     borderRadius: 3,
     borderWidth: 1,
     height: 30,
     paddingRight: 12,
     paddingLeft: 12
   },
-  surfacelarge: {
+  large: {
     borderRadius: 4,
     borderWidth: 1,
     height: 40,
