@@ -1,23 +1,28 @@
 const BackgroundColors = {
-  //边框颜色
 
   //背景颜色
+  default: '#06C1AE',
   orange: '#FF9900',
   blue: '#06C1AE',
   red: '#EC5330',
-  gray: '#D2D2D2',
-  //禁用颜色
-  orangeDisable: '#FFD084',
-  blueDisable: '#96E4DA',
-  redDisable: '#FDC1B5',
-  grayDisable: '#E5E5E5',
-  //激活颜色
+  gray: '#D2D2D2'
+};
+
+const ActiveColor = {
   orangeActive: '#D66500',
+  defaultActive: '#049387',
   blueActive: '#049387',
   redActive: '#C23E1A',
   grayActive: '#8E8E8E'
 };
 
+const DisableColor = {
+  orangeDisable: '#FFD084',
+  blueDisable: '#96E4DA',
+  defaultDisable: '#96E4DA',
+  redDisable: '#FDC1B5',
+  grayDisable: '#E5E5E5'
+}
 const FontColors = {
      //字体颜色
   fontWhite: '#FFFFFF',
@@ -40,5 +45,7 @@ const FontSize = {
 export {
     BackgroundColors as BackgroundColors,
     FontColors as FontColors,
-    FontSize as FontSize
+    FontSize as FontSize,
+    ActiveColor as ActiveColor,
+    DisableColor as DisableColor
 };

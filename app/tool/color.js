@@ -26,16 +26,16 @@ export class Color {
       return RGB.hex6ToRgb(tempColor);
     }
     if (rgbInt.exec(color)) {
-      return RGB.rgbIntTo(color);
+      return RGB.rgbIntTo(color, rgbInt);
     }
     if (rgbPercent.exec(color)) {
-      return RGB.rgbPercent(color);
+      return RGB.rgbPercent(color, rgbPercent);
     }
     if (rgbaInt.exec(color)) {
-      return color;
+      return RGB.rgbIntTo(color, rgbaInt);
     }
     if (rgbaPercent.exec(color)) {
-      return RGB.rgbPercent(color);
+      return RGB.rgbPercent(color, rgbaPercent);
     }
     if (hsl.exec(color)) {
       let hslValue = HSL.getValue(color);
@@ -66,17 +66,18 @@ export class RGB {
                    color & 0xff,
                    1);
   }
-  static rgbIntTo (color) {
-    return new RGB(parseFloat(rgbaInt.exec(color)[1]),
-                   parseFloat(rgbaInt.exec(color)[2]),
-                   parseFloat(rgbaInt.exec(color)[3]),
-                   1);
+  static rgbIntTo (color, type) {
+    console.log(type.exec(color));
+    return new RGB(parseFloat(type.exec(color)[1]),
+                   parseFloat(type.exec(color)[2]),
+                   parseFloat(type.exec(color)[3]),
+                   parseFloat(type.exec(color)[4]) || 1);
   }
-  static rgbPercentTo (color) {
-    return new RGB(255 * parseFloat(rgbPercent.exec(color)[1]) / 100,
-                   255 * parseFloat(rgbPercent.exec(color)[2]) / 100,
-                   255 * parseFloat(rgbPercent.exec(color)[3]) / 100,
-                   parseFloat(rgbaPercent.exec(color)[4]) / 100 || 1);
+  static rgbPercentTo (color, type) {
+    return new RGB(255 * parseFloat(type.exec(color)[1]) / 100,
+                   255 * parseFloat(type.exec(color)[2]) / 100,
+                   255 * parseFloat(type.exec(color)[3]) / 100,
+                   parseFloat(type.exec(color)[4]) / 100 || 1);
   }
 }
 export class HSL {

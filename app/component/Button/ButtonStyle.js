@@ -1,87 +1,76 @@
 import StyleSheet from 'react-native-stylesheet-xg';
-import {BackgroundColors, FontColors, FontSize} from './ButtonInfo';
+import {BackgroundColors, FontColors, FontSize, ActiveColor, DisableColor} from './ButtonInfo';
 import {Color, RGB, HSL} from 'tool';
 
 // set The style base
 StyleSheet.setBase(360);
 
-
-export function getBasicColor(theme, type, flag) {
-  if (theme === 'default') {
-    theme = 'blue';
+export class BasicColor {
+  constructor (theme, type) {
+    this.theme = theme;
+    this.type = type;
+    this._themeColor = this.getBasicColor();
+    this._typeColor = this.getTypeColor();
+    this.themeColor = this._typeColor.themeColor;
+    this.textColor = this._typeColor.textColor;
   }
-  let themeMap = ['orange', 'blue', 'red', 'gray'];
-  let themeColor;
-  if (themeMap.indexOf(theme) === -1) {
-    let newColor = HSL.rgbToHsl(Color.format(theme));
-    let newColorDisable = newColor.lighten(0.3);
-    let newColorActive = newColor.darken(0.3);
-    themeColor = 'hsla(' + newColor.h + ', ' + newColor.s + '%, ' + newColor.l + '%, ' + newColor.a + ')';
-  } else {
-    themeColor = BackgroundColors[theme];
+
+  colorJoint (color) {
+    return 'hsla(' + color.h + ', ' + color.s + '%, ' + color.l + '%, ' + color.a + ')';
+  }
+  getBasicColor () {
+    let themeMap = ['orange', 'blue', 'red', 'gray', 'default'];
+    let themeColor;
+    if (themeMap.indexOf(this.theme) === -1) {
+      let newColor = HSL.rgbToHsl(Color.format(this.theme));
+      let newColorDisable = this.colorJoint(newColor.lighten(0.3));
+      let newColorActive = this.colorJoint(newColor.darken(0.3));
+      themeColor = this.colorJoint(newColor);
+      this.getActiveColor(newColorActive);
+      this.getDisableColor(newColorDisable);
+    } else {
+      themeColor = BackgroundColors[this.theme];
+      this.getActiveColor(ActiveColor[this.theme + 'Active']);
+      this.getDisableColor(DisableColor[this.theme + 'Disable']);
+    }
+    return themeColor;
   } 
-  let ButtonThemeType;
-  console.log(themeColor);
-  switch (type) {
-    case 'surface':
-      ButtonThemeType = StyleSheet.create({
-        theme: {
-          backgroundColor: themeColor,
-          borderColor: themeColor
-        },
-        text: {
-          color: FontColors.fontWhite
-        }
-      });
-      if (flag) {
-        return ButtonThemeType.theme;
-      }
-      return ButtonThemeType.text;
-    default:
-      ButtonThemeType = StyleSheet.create({
-        theme: {
-          borderColor: themeColor
-        },
-        text: {
-          color: themeColor
-        }
-      });
-      if (flag) {
-        return ButtonThemeType.theme;
-      }
-      return ButtonThemeType.text;
+  getActiveColor (color) {
+    this.activeColor = color;
+    this.activeColorCSS = {backgroundColor: this.activeColor, borderColor: this.activeColor};
+  }
+  getDisableColor (color) {
+    this.disableColor = color;
+    this.disableColorCSS = {backgroundColor: this.disableColor, borderColor: this.disableColor};
+  }
+  getTypeColor () {
+    let ButtonThemeType;
+    switch (this.type) {
+      case 'surface':
+        ButtonThemeType = StyleSheet.create({
+          themeColor: {
+            backgroundColor: this._themeColor,
+            borderColor: this._themeColor
+          },
+          textColor: {
+            color: FontColors.fontWhite
+          }
+        });
+        return ButtonThemeType;
+      default:
+        ButtonThemeType = StyleSheet.create({
+          themeColor: {
+            borderColor: this._themeColor
+          },
+          textColor: {
+            color: this._themeColor
+          }
+        });
+        return ButtonThemeType;
+    }
   }
 }
 
-export let ButtonDisableStyle = StyleSheet.create({
-  default: {
-    backgroundColor: BackgroundColors.blueDisable
-  },
-  orange: {
-    backgroundColor: BackgroundColors.orangeDisable
-  },
-  red: {
-    backgroundColor: BackgroundColors.redDisable
-  },
-  gray: {
-    backgroundColor: BackgroundColors.grayDisable
-  }
-});
-
-export let ButtonActiveStyle = StyleSheet.create({
-  default: {
-    backgroundColor: BackgroundColors.blueActive
-  },
-  orange: {
-    backgroundColor: BackgroundColors.orangeActive
-  },
-  red: {
-    backgroundColor: BackgroundColors.redActive
-  },
-  gray: {
-    backgroundColor: BackgroundColors.grayActive
-  }
-});
 
 export let ButtonType = StyleSheet.create({
   default: {

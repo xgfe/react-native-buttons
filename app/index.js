@@ -3,7 +3,9 @@ import {observer} from 'mobx-react/native';
 import {observable} from 'mobx';
 import {
   View,
-  Text
+  Text,
+  TouchableHighlight,
+  StyleSheet
 } from 'react-native';
 import {Button} from 'component';
 
@@ -17,6 +19,9 @@ setInterval(() => {
 }, 100);
 
 class button extends Component {
+  _onPressButton () {
+    console.log('onpress');
+  }
   render() {
     return (
       <View style={{marginLeft: 20}}>
@@ -24,15 +29,36 @@ class button extends Component {
           <Button
             type="surface"
             size="small"
-            theme="#EE3B3B">Small</Button>
+            theme="orange"
+            onPress={this._onPressButton}>Small</Button>
           <Button
-            style={{marginTop: 50}}
+            selfStyle={{marginTop: 50}}
             type="ghost"
-            theme="default">Default</Button>
+            theme="blue"
+            onPress={this._onPressButton}>Default</Button>
           <Button
-            style={{marginTop: 100}}
+            selfStyle={{marginTop: 100}}
             size="large"
-            theme="orange">Large</Button>
+            theme="red"
+            onPress={this._onPressButton}>Large</Button>
+             <Button
+            selfStyle={{marginTop: 160}}
+            theme="gray"
+            onPress={this._onPressButton}>Default</Button>
+             <Button
+            selfStyle={{marginTop: 220}}
+            theme="#BA55D3"
+            disabled={true}
+            onPress={this._onPressButton}>Default</Button>
+            <Button
+            selfStyle={{marginTop: 280}}
+            theme="rgba(238,106,167,0.8)"
+            onPress={this._onPressButton}>Default</Button>
+             <Button
+            selfStyle={{marginTop: 340}}
+            size="large"
+            theme="#00C5CD"
+            onPress={this._onPressButton}>Large</Button>
       </View>
       );
   }

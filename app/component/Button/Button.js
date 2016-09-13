@@ -4,13 +4,11 @@ import {
   TouchableHighlight
 } from 'react-native';
 import {
-  ButtonStyle,
-  ButtonDisableStyle,
-  ButtonActiveStyle,
   ButtonType,
   ButtonOuter,
-  getBasicColor
+  BasicColor
 } from './ButtonStyle';
+import {UnderlayColor} from './ButtonInfo';
 
 import {Color, RGB, HSL} from 'tool';
 
@@ -21,20 +19,16 @@ class Button extends Component {
     this.renderChildren = this._renderChildren.bind(this);
   }
 
-  _renderChildren() {
+  _renderChildren(size, textColor) {
     const {
-      children = '',
-      theme = 'default',
-      type = 'surface',
-      surface = 'default',
-      size = 'default'
+      children = ''
     } = this.props;
     if (React.isValidElement(children)) {
       return children;
     }
     if (typeof children === 'string') {
       return <Text
-                style={[ButtonType[size], getBasicColor(theme, type, 0)]}>
+                style={[ButtonType[size], textColor]}>
                 {children}
              </Text>;
     }
@@ -45,13 +39,21 @@ class Button extends Component {
       children = '',
       theme = 'default',
       type = 'surface',
-      size = 'default'
+      size = 'default',
+      disabled = false
     } = this.props;
+    let colorConfig = new BasicColor(theme, type);
+    console.log(colorConfig.disableColorCSS);
     return (
       <TouchableHighlight
-        style={[this.props.style, ButtonOuter.btn, ButtonOuter[size], getBasicColor(theme, type, 1)]}
+        style={[this.props.selfStyle,
+               ButtonOuter.btn, ButtonOuter[size],
+               colorConfig.themeColor,
+               disabled && colorConfig.disableColorCSS]}
+        underlayColor={colorConfig.activeColor}
+        {...this.props}
         >
-        {this._renderChildren()}
+        {this._renderChildren(size, colorConfig.textColor)}
       </TouchableHighlight>
     );
   }
