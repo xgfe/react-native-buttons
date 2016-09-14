@@ -5,7 +5,8 @@ import {
   View,
   Text,
   TouchableHighlight,
-  StyleSheet
+  StyleSheet,
+  TouchableNativeFeedback
 } from 'react-native';
 import {Button} from 'component';
 
@@ -24,8 +25,7 @@ class button extends Component {
   }
   render() {
     return (
-      <View style={{marginLeft: 20}}>
-        <Text>Just for fun</Text>
+      <View style={{marginLeft: 20, marginTop: 20}}>
           <Button
             type="surface"
             size="small"

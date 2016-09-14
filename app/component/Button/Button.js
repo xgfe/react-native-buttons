@@ -4,6 +4,7 @@ import {
   TouchableHighlight,
   ActivityIndicator,
   TouchableOpacity,
+  TouchableNativeFeedback,
   View
 } from 'react-native';
 import {
@@ -80,20 +81,22 @@ class Button extends Component {
       active = false
     } = this.props;
     let colorConfig = new BasicColor(theme, type, disableColor, activeColor, loadingColor);
+    let handleProps = (!disabled && !isLoading) ? this.props : null;
     return (
-      <TouchableHighlight
-        style={[ButtonOuter.btn,
+       <TouchableNativeFeedback
+        background={TouchableNativeFeedback.Ripple(colorConfig.disableColor)}
+        {...handleProps}
+        >
+        <View
+          style={[ButtonOuter.btn,
                ButtonOuter[size],
                colorConfig.themeColor,
                this.props.selfStyle,
                active && colorConfig.activeColorCSS,
-               (disabled || isLoading) && colorConfig.disableColorCSS]}
-        underlayColor={colorConfig.activeColor}
-        {...this.props}
-        disabled={disabled || isLoading}
-        >
+               (disabled || isLoading) && colorConfig.disableColorCSS]}>
         {this._renderChildren(size, colorConfig)}
-      </TouchableHighlight>
+        </View>
+      </TouchableNativeFeedback>
     );
   }
 }
