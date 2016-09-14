@@ -52,7 +52,8 @@ class Button extends Component {
       theme = 'default',
       type = 'surface',
       size = 'default',
-      disabled = false
+      disabled = false,
+      isLoading = false
     } = this.props;
     let colorConfig = new BasicColor(theme, type);
     return (
@@ -63,6 +64,7 @@ class Button extends Component {
                disabled && colorConfig.disableColorCSS]}
         underlayColor={colorConfig.activeColor}
         {...this.props}
+        disabled={disabled || isLoading}
         >
         {this._renderChildren(size, colorConfig.textColor)}
       </TouchableHighlight>
