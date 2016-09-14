@@ -38,12 +38,12 @@ export class Color {
       return RGB.rgbPercent(color, rgbaPercent);
     }
     if (hsl.exec(color)) {
-      let hslValue = HSL.getValue(color);
+      let hslValue = HSL.getValue(color, hsl);
       return hslValue;
     }
     if (hsla.exec(color)) {
-      let hslValue = HSL.getValue(color);
-      return hslValue;
+      let hslaValue = HSL.getValue(color, hsla);
+      return hslaValue;
     }
   }
 }
@@ -67,7 +67,6 @@ export class RGB {
                    1);
   }
   static rgbIntTo (color, type) {
-    console.log(type.exec(color));
     return new RGB(parseFloat(type.exec(color)[1]),
                    parseFloat(type.exec(color)[2]),
                    parseFloat(type.exec(color)[3]),
@@ -87,12 +86,12 @@ export class HSL {
     this.l = l;
     this.a = a;
   }
-  static getValue (color) {
-    let h = hsl.exec(color)[1];
-    let s = hsl.exec(color)[2] / 100;
-    let l = hsl.exec(color)[3] / 100;
-    let a = hsl.exec(color)[4] || 1;
-    HSL.judgeType({h, s, l, a});
+  static getValue (color, type) {
+    let h = type.exec(color)[1];
+    let s = type.exec(color)[2] / 100;
+    let l = type.exec(color)[3] / 100;
+    let a = type.exec(color)[4] || 1;
+    return HSL.judgeType({h, s, l, a});
   }
   static judgeType (color) {
     let {h, s, l, a} = color;
@@ -102,9 +101,9 @@ export class HSL {
       let q = l < 0.5 ? l * (1 + s) : l + s - (l * s);
       let p = 2 * l - q;
       h = h / 360;
-      return new RGB(HSL.hslToRgb(p, q, h + 1 / 3),
-                       HSL.hslToRgb(p, q, h),
-                       HSL.hslToRgb(p, q, h - 1 / 3),
+      return new RGB(HSL.hslToRgb(p, q, h + 1 / 3) * 255,
+                       HSL.hslToRgb(p, q, h) * 255,
+                       HSL.hslToRgb(p, q, h - 1 / 3) * 255,
                        a);
     }
   }
@@ -121,6 +120,7 @@ export class HSL {
     return p;
   }
   static rgbToHsl (color) {
+    //console.log(color);
     let r = color.r / 255;
     let g = color.g / 255;
     let b = color.b / 255;

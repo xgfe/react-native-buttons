@@ -28,7 +28,8 @@ class Button extends Component {
       children = '',
       isLoading = false,
       disabled = false,
-      loadingTitle = 'Loading'
+      loadingTitle = 'Loading',
+      active = false
     } = this.props;
     let childrenNode = [];
     if (isLoading) {
@@ -37,10 +38,13 @@ class Button extends Component {
       return <View style={[{'flexDirection': 'row'}, this.props.innerStyle]}>
                 <ActivityIndicator
                   animating={true}
-                  color={color.activeColor}
+                  color={color.loadColor}
                   size={loadingSize}/>
-                <Text style={[color.textColor, {marginLeft: 5}, (disabled || isLoading) && color.disableTextColorCSS]}>{
-                  loadingTitle}
+                <Text style={[color.textColor,
+                              {marginLeft: 5},
+                              (active && color.activeTextColorCSS),
+                              (disabled || isLoading) && color.disableTextColorCSS]}>
+                {loadingTitle}
                 </Text>
               </View>;
     } else {
@@ -49,7 +53,10 @@ class Button extends Component {
           childrenNode.push(item);
         } else if (typeof item === 'string' || item === 'number') {
           const node = (<Text
-                  style={[ButtonType[size], color.textColor]}
+                  style={[ButtonType[size],
+                          color.textColor,
+                          (active && color.activeTextColorCSS),
+                          (disabled || isLoading) && color.disableTextColorCSS]}
                   key={item}>
                   {item}
               </Text>);
@@ -66,15 +73,20 @@ class Button extends Component {
       type = 'surface',
       size = 'default',
       disabled = false,
-      isLoading = false
+      isLoading = false,
+      disableColor = '',
+      activeColor = '',
+      loadingColor = '',
+      active = false
     } = this.props;
-    let colorConfig = new BasicColor(theme, type);
+    let colorConfig = new BasicColor(theme, type, disableColor, activeColor, loadingColor);
     return (
       <TouchableHighlight
         style={[ButtonOuter.btn,
                ButtonOuter[size],
                colorConfig.themeColor,
                this.props.selfStyle,
+               active && colorConfig.activeColorCSS,
                (disabled || isLoading) && colorConfig.disableColorCSS]}
         underlayColor={colorConfig.activeColor}
         {...this.props}

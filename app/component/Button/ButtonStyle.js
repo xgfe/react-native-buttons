@@ -6,9 +6,12 @@ import {Color, RGB, HSL} from 'tool';
 StyleSheet.setBase(360);
 
 export class BasicColor {
-  constructor (theme, type) {
-    this.theme = theme;
-    this.type = type;
+  constructor (theme, type, initDisableColor, initActiveColor, initLoadingColor) {
+    this.theme = theme || '';
+    this.type = type || '';
+    this._initActiveColor = initActiveColor || '';
+    this._initDisableColor = initDisableColor || '';
+    this._initLoadingColor = initLoadingColor || '';
     this._themeColor = this.getBasicColor();
     this._typeColor = this.getTypeColor();
     this.themeColor = this._typeColor.themeColor;
@@ -17,6 +20,10 @@ export class BasicColor {
 
   colorJoint (color) {
     return 'hsla(' + color.h + ', ' + color.s + '%, ' + color.l + '%, ' + color.a + ')';
+  }
+  colorResolve (color) {
+    let newHSL = HSL.rgbToHsl(Color.format(color));
+    return newHSL;
   }
   getBasicColor () {
     let themeMap = ['orange', 'blue', 'red', 'gray', 'default'];
@@ -36,7 +43,9 @@ export class BasicColor {
     return themeColor;
   } 
   getActiveColor (color) {
-    this.activeColor = color;
+    if (this._initActiveColor) {
+      this.activeColor = this._initActiveColor;
+    } else {this.activeColor = color;}
     if (this.type === 'surface') {
       this.activeColorCSS = {backgroundColor: this.activeColor, borderColor: this.activeColor};
     } else if (this.type === 'ghost') {
@@ -44,8 +53,19 @@ export class BasicColor {
       this.activeTextColorCSS = {color: this.activeColor};
     }
   }
+  getLoadingColor (color) {
+    if (this._initLoadingColor) {
+      this.loadColor = this._initLoadingColor;
+    } else {
+      let beforeHSL = this.colorResolve(color);
+      this.loadColor = this.colorJoint(beforeHSL.darken(0.4));
+    }
+  }
   getDisableColor (color) {
-    this.disableColor = color;
+    if (this._initDisableColor) {
+      this.disableColor = this._initDisableColor;
+    } else {this.disableColor = color;}
+    this.getLoadingColor(this.disableColor); 
     if (this.type === 'surface') {
       this.disableColorCSS = {backgroundColor: this.disableColor, borderColor: this.disableColor};
     } else if (this.type === 'ghost') {
