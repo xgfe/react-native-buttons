@@ -37,11 +37,21 @@ export class BasicColor {
   } 
   getActiveColor (color) {
     this.activeColor = color;
-    this.activeColorCSS = {backgroundColor: this.activeColor, borderColor: this.activeColor};
+    if (this.type === 'surface') {
+      this.activeColorCSS = {backgroundColor: this.activeColor, borderColor: this.activeColor};
+    } else if (this.type === 'ghost') {
+      this.activeColorCSS = {borderColor: this.activeColor};
+      this.activeTextColorCSS = {color: this.activeColor};
+    }
   }
   getDisableColor (color) {
     this.disableColor = color;
-    this.disableColorCSS = {backgroundColor: this.disableColor, borderColor: this.disableColor};
+    if (this.type === 'surface') {
+      this.disableColorCSS = {backgroundColor: this.disableColor, borderColor: this.disableColor};
+    } else if (this.type === 'ghost') {
+      this.disableColorCSS = {borderColor: this.disableColor};
+      this.disableTextColorCSS = {color: this.disableColor};
+    }
   }
   getTypeColor () {
     let ButtonThemeType;

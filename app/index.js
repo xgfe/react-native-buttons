@@ -30,6 +30,8 @@ class button extends Component {
             type="surface"
             size="small"
             theme="orange"
+            loadingTitle="正在加载"
+            isLoading={true}
             onPress={this._onPressButton}>Small</Button>
           <Button
             selfStyle={{marginTop: 50}}

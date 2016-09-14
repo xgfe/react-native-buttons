@@ -27,16 +27,22 @@ class Button extends Component {
     const {
       children = '',
       isLoading = false,
+      disabled = false,
       loadingTitle = 'Loading'
     } = this.props;
     let childrenNode = [];
     if (isLoading) {
       let loadingSize = size;
       if (loadingSize === 'default') {loadingSize = 'small';}
-      return <View style={[{'flexDirection': 'row'}, this.props.innerStyle]}><ActivityIndicator
-                animating={true}
-                color={color.themeColor}
-                size={loadingSize}/><Text style={[color.textColor, {marginLeft: 5}]}>{loadingTitle}</Text></View>;
+      return <View style={[{'flexDirection': 'row'}, this.props.innerStyle]}>
+                <ActivityIndicator
+                  animating={true}
+                  color={color.activeColor}
+                  size={loadingSize}/>
+                <Text style={[color.textColor, {marginLeft: 5}, (disabled || isLoading) && color.disableTextColorCSS]}>{
+                  loadingTitle}
+                </Text>
+              </View>;
     } else {
       React.Children.forEach(children, function (item) {
         if (React.isValidElement(item)) {
