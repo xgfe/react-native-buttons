@@ -35,6 +35,7 @@ class button extends Component {
             selfStyle={{marginTop: 50}}
             type="ghost"
             theme="blue"
+            isLoading={true}
             onPress={this._onPressButton}>Default</Button>
           <Button
             selfStyle={{marginTop: 100}}
@@ -48,18 +49,17 @@ class button extends Component {
              <Button
             selfStyle={{marginTop: 220}}
             theme="#BA55D3"
-            disabled={true}
+            loadingTitle="正在加载"
+            isLoading={true}
             onPress={this._onPressButton}>Default</Button>
             <Button
             selfStyle={{marginTop: 280}}
             theme="rgba(238,106,167,0.8)"
-            onPress={this._onPressButton}>Test</Button>
+            onPress={this._onPressButton}><Text style={{marginRight: 20}}>test</Text>test</Button>
              <Button
-            selfStyle={{marginTop: 340, borderRadius: 20}}
-            size="large"
+            selfStyle={{marginTop: 340}}
             theme="#00C5CD"
-            isLoading={true}
-            onPress={this._onPressButton}>Large</Button>
+            onPress={this._onPressButton}>default</Button>
       </View>
       );
   }

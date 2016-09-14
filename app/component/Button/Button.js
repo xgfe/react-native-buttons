@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import {
   Text,
   TouchableHighlight,
-  ActivityIndicator
+  ActivityIndicator,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import {
   ButtonType,
@@ -21,34 +23,39 @@ class Button extends Component {
     this.renderChildren = this._renderChildren.bind(this);
   }
 
-  _renderChildren(size, textColor) {
+  _renderChildren(size, color) {
     const {
       children = '',
-      isLoading = false
+      isLoading = false,
+      loadingTitle = 'Loading'
     } = this.props;
-    if (React.isValidElement(children)) {
-      return children;
-    }
-    if (typeof children === 'string') {
-      if (isLoading) {
-        let loadingSize = size;
-        if (loadingSize === 'default') {loadingSize = 'small';}
-        return <ActivityIndicator
-               animating={true}
-               size={loadingSize}>
-               </ActivityIndicator>
-      } else {
-        return <Text
-                style={[ButtonType[size], textColor]}>
-                {children}
-             </Text>;
-      }
+    let childrenNode = [];
+    if (isLoading) {
+      let loadingSize = size;
+      if (loadingSize === 'default') {loadingSize = 'small';}
+      return <View style={[{'flexDirection': 'row'}, this.props.innerStyle]}><ActivityIndicator
+                animating={true}
+                color={color.themeColor}
+                size={loadingSize}/><Text style={[color.textColor, {marginLeft: 5}]}>{loadingTitle}</Text></View>;
+    } else {
+      React.Children.forEach(children, function (item) {
+        if (React.isValidElement(item)) {
+          childrenNode.push(item);
+        } else if (typeof item === 'string' || item === 'number') {
+          const node = (<Text
+                  style={[ButtonType[size], color.textColor]}
+                  key={item}>
+                  {item}
+              </Text>);
+          childrenNode.push(node);
+        }
+      });
+      return <View style={[{'flexDirection': 'row'}, this.props.innerStyle]}>{childrenNode}</View>;
     }
   }
 
   render() {
     const {
-      children = '',
       theme = 'default',
       type = 'surface',
       size = 'default',
@@ -62,19 +69,18 @@ class Button extends Component {
                ButtonOuter[size],
                colorConfig.themeColor,
                this.props.selfStyle,
-               disabled && colorConfig.disableColorCSS]}
+               (disabled || isLoading) && colorConfig.disableColorCSS]}
         underlayColor={colorConfig.activeColor}
         {...this.props}
         disabled={disabled || isLoading}
         >
-        {this._renderChildren(size, colorConfig.textColor)}
+        {this._renderChildren(size, colorConfig)}
       </TouchableHighlight>
     );
   }
 }
 
 Button.propTypes = {
-  children: React.PropTypes.oneOfType([React.PropTypes.string.isRequired, React.PropTypes.object.isRequired]),
   onPress: React.PropTypes.func.isRequired,
   disabled: React.PropTypes.bool,
   theme: React.PropTypes.string.isRequired,
