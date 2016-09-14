@@ -55,7 +55,7 @@ class button extends Component {
             theme="rgba(238,106,167,0.8)"
             onPress={this._onPressButton}>Test</Button>
              <Button
-            selfStyle={{marginTop: 340}}
+            selfStyle={{marginTop: 340, borderRadius: 20}}
             size="large"
             theme="#00C5CD"
             isLoading={true}

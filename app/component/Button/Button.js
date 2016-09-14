@@ -58,9 +58,10 @@ class Button extends Component {
     let colorConfig = new BasicColor(theme, type);
     return (
       <TouchableHighlight
-        style={[this.props.selfStyle,
-               ButtonOuter.btn, ButtonOuter[size],
+        style={[ButtonOuter.btn,
+               ButtonOuter[size],
                colorConfig.themeColor,
+               this.props.selfStyle,
                disabled && colorConfig.disableColorCSS]}
         underlayColor={colorConfig.activeColor}
         {...this.props}
