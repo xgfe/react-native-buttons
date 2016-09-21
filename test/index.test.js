@@ -55,6 +55,7 @@ describe('TEST PROPS', () => {
 
   it('check platform', () => {
     Platform.Version = 23;
+    TouchableNativeFeedback.Ripple = function(){};
     const wrapper3 = shallow(
        <Button
           selfStyle={{marginTop: 450}}
