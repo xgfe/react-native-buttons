@@ -14,7 +14,8 @@ import {
 } from './ButtonStyle';
 import {UnderlayColor} from './ButtonInfo';
 
-import {Color, RGB, HSL} from 'tool';
+import {judgePlatformLevel} from 'tool';
+import {Color, RGB, HSL} from 'react-native-colortool';
 
 class Button extends Component {
 
@@ -82,22 +83,40 @@ class Button extends Component {
     } = this.props;
     let colorConfig = new BasicColor(theme, type, disableColor, activeColor, loadingColor);
     let handleProps = (!disabled && !isLoading) ? this.props : null;
-    return (
-       <TouchableNativeFeedback
-        background={TouchableNativeFeedback.Ripple(colorConfig.disableColor)}
-        {...handleProps}
+
+    if (!judgePlatformLevel('TouchableNativeFeedback')) {
+      return (
+       <TouchableHighlight
+        style={[ButtonOuter.btn,
+                 ButtonOuter[size],
+                 colorConfig.themeColor,
+                 this.props.selfStyle,
+                 active && colorConfig.activeColorCSS,
+                 (disabled || isLoading) && colorConfig.disableColorCSS]}
+        underlayColor={colorConfig.activeColor}
+        {...this.props}
+        disabled={disabled || isLoading}
         >
-        <View
-          style={[ButtonOuter.btn,
-               ButtonOuter[size],
-               colorConfig.themeColor,
-               this.props.selfStyle,
-               active && colorConfig.activeColorCSS,
-               (disabled || isLoading) && colorConfig.disableColorCSS]}>
-        {this._renderChildren(size, colorConfig)}
-        </View>
-      </TouchableNativeFeedback>
-    );
+          {this._renderChildren(size, colorConfig)}
+      </TouchableHighlight>
+      );
+    }
+    return (
+      <TouchableNativeFeedback
+      background={TouchableNativeFeedback.Ripple(colorConfig.disableColor)}
+      {...handleProps}
+      >
+      <View
+        style={[ButtonOuter.btn,
+              ButtonOuter[size],
+              colorConfig.themeColor,
+              this.props.selfStyle,
+              active && colorConfig.activeColorCSS,
+              (disabled || isLoading) && colorConfig.disableColorCSS]}>
+      {this._renderChildren(size, colorConfig)}
+      </View>
+    </TouchableNativeFeedback>
+  );
   }
 }
 

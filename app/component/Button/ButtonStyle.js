@@ -1,6 +1,6 @@
 import StyleSheet from 'react-native-stylesheet-xg';
 import {BackgroundColors, FontColors, FontSize, ActiveColor, DisableColor} from './ButtonInfo';
-import {Color, RGB, HSL} from 'tool';
+import {Color, RGB, HSL} from 'react-native-colortool';
 
 // set The style base
 StyleSheet.setBase(360);

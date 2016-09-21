@@ -1,1 +1,1 @@
-export {Color, RGB, HSL} from './color';
+export {judgePlatformLevel} from './judge';
