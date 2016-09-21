@@ -10,7 +10,7 @@ require.extensions['.js'] = function (module, fileName) {
   var src;
 
   if (fileName.indexOf('node_modules/') >= 0
-    && (fileName.indexOf('react-native-') === -1
+    && (fileName.indexOf('node_modules/react-native-') === -1
     || fileName.indexOf('react-native-mock') >= 0)) {
     return (origJs || require.extensions['.js'])(module, fileName);
   }
