@@ -1,13 +1,28 @@
 {
-  "name": "button",
+  "name": "react-native-button",
   "version": "0.0.1",
-  "private": true,
+  "private": false,
+  "main": "app/component/index",
+  "description": "react native button for android.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:lulutia/react-native-button.git"
+  },
+  "keywords": [
+    "react-native",
+    "button"
+  ],
+  "author": "lulutia",
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "mocha": "./node_modules/mocha/bin/_mocha ./test/*.test.js --watch",
+    "test": "node ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha ./test/*.test.js",
+    "coverage": "cat ./coverage/lcov.info | coveralls",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w",
+    "changelogsee": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0"
   },
   "dependencies": {
-    "mobx": "^2.5.1",
-    "mobx-react": "^3.5.5",
     "react": "15.3.1",
     "react-native": "^0.33.0",
     "react-native-stylesheet-xg": "^1.0.3",
@@ -15,6 +30,30 @@
   },
   "devDependencies": {
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-preset-react-native-stage-0": "^1.0.1"
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "validate-commit-msg": "^2.6.1",
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.9",
+    "cz-conventional-changelog": "^1.1.6",
+    "enzyme": "^2.3.0",
+    "ghooks": "^1.2.1",
+    "istanbul": "^1.0.0-alpha.2",
+    "jsdom": "^9.2.1",
+    "mocha": "^2.5.3",
+    "react-addons-test-utils": "15.0.2",
+    "react-dom": "15.0.2",
+    "react-native-mock": "^0.2.2",
+    "sinon": "^1.17.4"
+  },
+   "config": {
+    "validate-commit-msg": {
+      "warnOnFail": true
+    },
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "commit-msg": "validate-commit-msg"
+    }
   }
 }
