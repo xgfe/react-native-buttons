@@ -3,7 +3,6 @@ import {
   Text,
   TouchableHighlight,
   ActivityIndicator,
-  TouchableOpacity,
   TouchableNativeFeedback,
   View
 } from 'react-native';
@@ -12,10 +11,8 @@ import {
   ButtonOuter,
   BasicColor
 } from './ButtonStyle';
-import {UnderlayColor} from './ButtonInfo';
 
 import {judgePlatformLevel} from '../../tool/judge';
-import {Color, RGB, HSL} from 'react-native-colortool';
 
 class Button extends Component {
 
