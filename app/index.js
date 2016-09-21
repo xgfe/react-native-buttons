@@ -11,13 +11,6 @@ import {
 import {Button} from 'component';
 
 // data
-var timerData = observable({
-  secondsPassed: 0
-});
-
-setInterval(() => {
-  timerData.secondsPassed++;
-}, 100);
 
 class button extends Component {
   _onPressButton () {

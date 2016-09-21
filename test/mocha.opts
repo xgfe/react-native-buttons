@@ -1,0 +1,4 @@
+--colors
+--require ./node_modules/react-native-mock/mock.js
+--compilers js:./compile.js
+--recursive
