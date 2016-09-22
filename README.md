@@ -9,8 +9,13 @@ react native button based on pure JavaScript with good expansibility.
 * This component provide you add as more other components as you can into the button(eg: icon).
 
 ### Example
-![image](https://raw.githubusercontent.com/lulutia/images/master/react-native-button/API high.gif)
-![image](https://raw.githubusercontent.com/lulutia/images/master/react-native-button/API low.gif)
+* API >= 21
+
+![image](https://raw.githubusercontent.com/lulutia/images/master/react-native-button/APIhigh.gif)
+
+* API < 21
+
+![image](https://raw.githubusercontent.com/lulutia/images/master/react-native-button/APIlow.gif)
 
 ### How to install
 ```
@@ -39,6 +44,15 @@ see the react native document of TouchableWithoutFeedback. All methods supported
 * you can see and run the example in the app/index.js.
 
 ```js
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
+import {Button} from 'react-native-buttons';
+
 class button extends Component {
   _onPressButton () {
     console.log('onpress');

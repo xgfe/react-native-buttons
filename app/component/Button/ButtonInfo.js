@@ -22,7 +22,8 @@ const DisableColor = {
   defaultDisable: '#96E4DA',
   redDisable: '#FDC1B5',
   grayDisable: '#E5E5E5'
-}
+};
+
 const FontColors = {
      //字体颜色
   fontWhite: '#FFFFFF',
