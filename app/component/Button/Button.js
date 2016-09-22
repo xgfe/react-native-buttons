@@ -81,7 +81,7 @@ class Button extends Component {
     let colorConfig = new BasicColor(theme, type, disableColor, activeColor, loadingColor);
     let handleProps = (!disabled && !isLoading) ? this.props : null;
 
-    if (!judgePlatformLevel('TouchableNativeFeedback')) {
+    if (!judgePlatformLevel('TouchableNativeFeedback') || disabled || isLoading) {
       return (
        <TouchableHighlight
         style={[ButtonOuter.btn,
@@ -90,7 +90,7 @@ class Button extends Component {
                  this.props.selfStyle,
                  active && colorConfig.activeColorCSS,
                  (disabled || isLoading) && colorConfig.disableColorCSS]}
-        underlayColor={colorConfig.activeColor}
+        underlayColor={type === 'surface' ? colorConfig.activeColor : '#EEE'}
         {...this.props}
         disabled={disabled || isLoading}
         >

@@ -41,7 +41,7 @@ export class BasicColor {
       this.getDisableColor(DisableColor[this.theme + 'Disable']);
     }
     return themeColor;
-  } 
+  }
   getActiveColor (color) {
     if (this._initActiveColor) {
       this.activeColor = this._initActiveColor;
@@ -65,7 +65,7 @@ export class BasicColor {
     if (this._initDisableColor) {
       this.disableColor = this._initDisableColor;
     } else {this.disableColor = color;}
-    this.getLoadingColor(this.disableColor); 
+    this.getLoadingColor(this.disableColor);
     if (this.type === 'surface') {
       this.disableColorCSS = {backgroundColor: this.disableColor, borderColor: this.disableColor};
     } else if (this.type === 'ghost') {
