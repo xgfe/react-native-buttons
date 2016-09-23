@@ -1,4 +1,4 @@
-###The React-Native-Button [![Build Status](https://travis-ci.org/xgfe/react-native-buttons.svg?branch=master)](https://travis-ci.org/xgfe/react-native-buttons)  [![Coverage Status](https://coveralls.io/repos/github/xgfe/react-native-buttons/badge.svg?branch=master)](https://coveralls.io/github/xgfe/react-native-buttons?branch=master)
+###The React-Native-Buttons [![Build Status](https://travis-ci.org/xgfe/react-native-buttons.svg?branch=master)](https://travis-ci.org/xgfe/react-native-buttons)  [![Coverage Status](https://coveralls.io/repos/github/xgfe/react-native-buttons/badge.svg?branch=master)](https://coveralls.io/github/xgfe/react-native-buttons?branch=master)
 
 react native button based on pure JavaScript with good expansibility.
 

@@ -17,3 +17,7 @@ LICENSE
 index.android.js
 index.ios.js
 .vscode
+
+validate-commit-msg.js
+tsconfig.json
+compile.js
