@@ -1,6 +1,6 @@
 {
   "name": "react-native-buttons",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "main": "app/component/index",
   "description": "react native button for android.",

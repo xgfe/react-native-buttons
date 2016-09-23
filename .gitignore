@@ -43,6 +43,4 @@ android/keystores/debug.keystore
 # VS code
 .vscode
 
-android
-ios
 coverage
