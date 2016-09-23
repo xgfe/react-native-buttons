@@ -23,12 +23,12 @@
     "changelogsee": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0"
   },
   "dependencies": {
-    "react": "15.3.1",
-    "react-native": "^0.33.0",
     "react-native-stylesheet-xg": "^1.0.3",
     "react-native-colortool": "^0.0.1"
   },
   "devDependencies": {
+    "react": "15.3.1",
+    "react-native": "^0.33.0",
     "babel-core": "^6.9.1",
     "babel-eslint": "^6.1.2",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
