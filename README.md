@@ -1,7 +1,9 @@
-###The React-Native-Button[![Build Status](https://travis-ci.org/lulutia/react-native-button.svg?branch=master)](https://travis-ci.org/lulutia/react-native-button) [![Coverage Status](https://coveralls.io/repos/github/lulutia/react-native-button/badge.svg?branch=master)](https://coveralls.io/github/lulutia/react-native-button?branch=master)
+###The React-Native-Button[![Build Status](https://travis-ci.org/xgfe/react-native-buttons.svg?branch=master)](https://travis-ci.org/xgfe/react-native-buttons) [![Coverage Status](https://coveralls.io/repos/github/xgfe/react-native-buttons/badge.svg?branch=master)](https://coveralls.io/github/xgfe/react-native-buttons?branch=master)
+
 react native button based on pure JavaScript with good expansibility.
 
 ### Main
+
 * This component provide 5 theme color for user to chose.
 * This component provide 2 type of button for user to chose.
 * This component provide the function that user can define their own theme color, we can help them to calculate the disabled color, active color and so on. Also they can define the disabled color and active color by themselves if they like.
@@ -18,11 +20,13 @@ react native button based on pure JavaScript with good expansibility.
 ![image](https://raw.githubusercontent.com/lulutia/images/master/react-native-button/APIlow.gif)
 
 ### How to install
+
 ```
 npm install react-native-buttons --save
 ```
 
 ### Properties
+
 | Prop  | Default  | Type | Description |
 | :------------ |:---------------:| :---------------:| :-----|
 | type | 'surface' | `string` | Specify the type of the button, you can chose form 'surface' and 'ghost'  |
@@ -38,9 +42,11 @@ npm install react-native-buttons --save
 | activeColor | - | `color type` | Specify the active color, if you do not specify this color, we can calculate it for you based on the theme color|
 
 ### Method
+
 see the react native document of TouchableWithoutFeedback. All methods supported by TouchableWithoutFeedback can be used here.
 
 ### Usage
+
 * you can see and run the example in the app/index.js.
 
 ```js
